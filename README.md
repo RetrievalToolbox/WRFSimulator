@@ -34,6 +34,8 @@ Download the TSIS solar model from LASP: [https://lasp.colorado.edu/lisird/data/
 
 ## Running
 
+Running simulations with one process, one thread:
+
     export XRTM_PATH=/path/to/XRTM
     julia --project=. ./bin/simulator \
         --WRF /path/to/WRF/file \
@@ -42,3 +44,16 @@ Download the TSIS solar model from LASP: [https://lasp.colorado.edu/lisird/data/
         --windows example_data/windows.yml \
         --TSIS /path/to/TSIS/file \
         --neighbors 4
+
+
+5 processes (4 additional ones), and two threads **each** (the RT computations are multi-threaded internally):
+
+    export XRTM_PATH=/path/to/XRTM
+    JULIA_NUM_THREADS=2 julia --project=. ./bin/simulator \
+        --WRF /path/to/WRF/file \
+        --output output.h5 \
+        --gases example_data/gases.yml \
+        --windows example_data/windows.yml \
+        --TSIS /path/to/TSIS/file \
+        --neighbors 4 --
+        --procs 4
