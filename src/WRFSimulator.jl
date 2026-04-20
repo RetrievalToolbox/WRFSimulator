@@ -58,7 +58,15 @@ module WRFSimulator
 
     function main()
 
-        # 1. Parse arguments
+        # Check for XRTM
+        if !haskey(ENV, "XRTM_PATH")
+            error("XRTM_PATH environmental variable not set! \
+                Please set it to the location of the XRTM library.")
+            exit(1)
+        end
+
+
+        # Parse arguments
         args = parse_commandline()
 
         # NN must be >= 0
