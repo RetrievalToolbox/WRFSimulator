@@ -17,13 +17,24 @@ To install the required dependencies:
 
 A quick check to see if the needed modules are indeed available (replace `/path/to/XRTM` with the actual path, possibly enable execution permissions for `bin/simulator`):
 
-    XRTM_PATH=/path/to/XRTM ./bin/simulator --help
+    export XRTM_PATH=/path/to/XRTM
+    ./bin/simulator --help
+
+On Mac, it is generally recommended to use absolute paths, and fully resolve them, something like
+
+    export XRTM_PATH=$HOME/my_xrtm
+    ./bin/simulator [...]
+
+rather than
+
+    XRTM_PATH=~/my_xrtm ./bin/simulator [...]
 
 ## Running
 
+    export XRTM_PATH=/path/to/XRTM
     julia --project=. ./bin/simulator \
-        --WRF /path/to/WRF/file
-        --OUTPUT output.h5 \
-        --GASES example_data/gases.yml \
-        --WINDOWS example \
-        --NEIGHBORS 4
+        --WRF /path/to/WRF/file \
+        --output output.h5 \
+        --gases example_data/gases.yml \
+        --windows example_data/windows.yml \
+        --neighbors 4
