@@ -1,0 +1,9 @@
+O2:
+  spectroscopy: ./o2_v52.hdf # replace path!
+  type: ABSCO
+  unit: # leave this empty to have "parts", otherwise put: ppm, ppb, ...
+
+CO2:
+  spectroscopy: ./co2_v52.hdf # replace path!
+  type: ABSCO
+  unit: ppm
