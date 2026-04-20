@@ -55,5 +55,5 @@ Running simulations with one process, one thread:
         --gases example_data/gases.yml \
         --windows example_data/windows.yml \
         --TSIS /path/to/TSIS/file \
-        --neighbors 4 --
+        --neighbors 4 \
         --procs 4
