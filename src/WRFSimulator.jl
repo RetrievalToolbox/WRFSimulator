@@ -40,6 +40,9 @@ module WRFSimulator
             "--gases", "-g"
                 help = "Path to gases YML file"
                 required = true
+            "--TSIS"
+                help = "Path to TSIS solar model file"
+                required = true
             "--output", "-o"
                 help = "Path to save the simulated radiances"
                 required = true
@@ -89,6 +92,7 @@ module WRFSimulator
         global_config = WRFSimulator.create_global_config(
             args["windows"],
             args["gases"],
+            args["TSIS"],
             47,
             47
         )

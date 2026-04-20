@@ -1,6 +1,7 @@
 function create_global_config(
     window_yml_fname::String,
     gas_yml_fname::String,
+    solar_model_fname::String,
     N_RT_level::Integer,
     N_met_level::Integer
 )
@@ -51,7 +52,7 @@ function create_global_config(
     @info "Creating solar configuration"
     solar_config = RESimulatorCore.SimulatorSolarConfig(
         solar_model_type="TSIS",
-        solar_model_path="/Users/psomkuti/Downloads/hybrid_reference_spectrum_p005nm_resolution_c2022-11-30_with_unc.nc",
+        solar_model_path=solar_model_fname,
     )
 
     @info "Creating RT configuration"

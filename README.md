@@ -29,6 +29,9 @@ rather than
 
     XRTM_PATH=~/my_xrtm ./bin/simulator [...]
 
+
+Download the TSIS solar model from LASP: [https://lasp.colorado.edu/lisird/data/tsis1_hsrs_p1nm](https://lasp.colorado.edu/lisird/data/tsis1_hsrs_p1nm)
+
 ## Running
 
     export XRTM_PATH=/path/to/XRTM
@@ -37,4 +40,5 @@ rather than
         --output output.h5 \
         --gases example_data/gases.yml \
         --windows example_data/windows.yml \
+        --TSIS /path/to/TSIS/file \
         --neighbors 4
