@@ -43,6 +43,9 @@ module WRFSimulator
             "--TSIS"
                 help = "Path to TSIS solar model file"
                 required = true
+            "--coords"
+                help = "Path to CSV file containing the lon/lat pairs"
+                required = true
             "--output", "-o"
                 help = "Path to save the simulated radiances"
                 required = true
@@ -110,15 +113,11 @@ module WRFSimulator
             Ingest coordinates to be sampled
         =#
 
-        lon_min = -132.
-        lon_max = -59
-        lat_min = 23.
-        lat_max = 54.0
-
-        N_sample = 100
-        sample_lons = lon_min .+ (lon_max - lon_min) .* rand(N_sample)
-        sample_lats = lat_min .+ (lat_max - lat_min) .* rand(N_sample)
-        lonlat_array = hcat(sample_lons, sample_lats)'
+        _raw_coord_txt = readlines(args["coords"])
+        lonlat_array = zeros(2, length(_raw_coord_txt))
+        for i in 1:length(_raw_coord_txt)
+            lonlat_array[:,i] = parse.(Ref(Float64), split(_raw_coord_txt[i], ","))
+        end
 
         @info "Creating scenes from WRF file .."
         all_scenes = WRFSimulator.generate_scenes_from_WRF(
@@ -129,10 +128,12 @@ module WRFSimulator
             NN=args["neighbors"]
         )
 
+        @sync @everywhere @info "(synchronizing)"
+
         @info "Processing $(length(all_scenes)) scenes!"
         if nworkers() > 1
             @info "(parallel processing: $(nprocs()))"
-            results = @showprogress showspeed=true @distributed (vcat) for scene in all_scenes
+            @time results = @showprogress showspeed=true @distributed (vcat) for scene in all_scenes
                 [RESimulatorCore.process_scene!(buffer, scene)]
             end
         else

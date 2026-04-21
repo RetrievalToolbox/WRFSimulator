@@ -39,9 +39,10 @@ Running simulations with one process, one thread:
     export XRTM_PATH=/path/to/XRTM
     julia --project=. ./bin/simulator \
         --WRF /path/to/WRF/file \
-        --output output.h5 \
+        --output output.nc4 \
         --gases example_data/gases.yml \
         --windows example_data/windows.yml \
+        --coords example_data/samples_10.csv \
         --TSIS /path/to/TSIS/file \
         --neighbors 4
 
@@ -51,9 +52,10 @@ Running simulations with one process, one thread:
     export XRTM_PATH=/path/to/XRTM
     JULIA_NUM_THREADS=2 julia --project=. ./bin/simulator \
         --WRF /path/to/WRF/file \
-        --output output.h5 \
+        --output output.nc4 \
         --gases example_data/gases.yml \
         --windows example_data/windows.yml \
+        --coords example_data/samples_10.csv \
         --TSIS /path/to/TSIS/file \
         --neighbors 4 \
         --procs 4
