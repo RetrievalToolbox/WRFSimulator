@@ -13,9 +13,11 @@ Assuming a working Julia environment, and XRTM having been correctly compiled, w
 
 To install the required dependencies:
 
+    julia --project=. -e 'using Pkg; Pkg.add(url="https://github.com/US-GHG-Center/RetrievalToolbox.jl")'
+    julia --project=. -e 'using Pkg; Pkg.add(url="https://github.com/RetrievalToolbox/RESimulatorCore")'
     julia --project=. -e 'using Pkg; Pkg.instantiate()'
 
-A quick check to see if the needed modules are indeed available (replace `/path/to/XRTM` with the actual path, possibly enable execution permissions for `bin/simulator`):
+For the time being, it is necessary to install RetrievalToolbox as well as the simulator core module RESimulatorCore manually, as they are not part of the Julia registry. A quick check to see if the needed modules are indeed available (replace `/path/to/XRTM` with the actual path, possibly enable execution permissions for `bin/simulator`):
 
     export XRTM_PATH=/path/to/XRTM
     ./bin/simulator --help
