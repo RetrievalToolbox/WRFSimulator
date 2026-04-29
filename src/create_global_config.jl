@@ -64,7 +64,7 @@ function create_global_config(
                     "solvers" => ["single"],
                     "add" => true, # zero-out RT container
                     "sun_normalized" => false, # use the actual solar spectrum
-                    "streams" => 8,
+                    "streams" => 2,
                     "options" => [
                         "output_at_levels",
                         "source_solar",

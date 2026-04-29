@@ -38,6 +38,7 @@ function write_out(
 
 
         for (i_swin, swin) in enumerate(global_config.spectral_windows)
+
             @info "Writing out $(swin)"
             spec_dim = swin.N_hires
 
@@ -55,7 +56,7 @@ function write_out(
                 ))
 
             # Create the radiance output variable
-            rad = defVar(grp, "radiance", Float64, ("spectral", "polarization", "scene"),
+            rad = defVar(grp, "radiance", Float32, ("spectral", "polarization", "scene"),
                 attrib = OrderedDict(
                     "units" => unit_str(buffer.rt[swin].radiance_unit),
                 )

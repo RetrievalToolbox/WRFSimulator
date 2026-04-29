@@ -213,19 +213,19 @@ function generate_scenes_from_WRF(
         # =======================
 
         # Grab the meteorological pressure level
-        met_pressure_levels = grab_vector_from_3d(WRF_pressure, idx_WRF, weights)
+        met_pressure = grab_vector_from_3d(WRF_pressure, idx_WRF, weights)
 
         psurf = grab_scalar_from_2d(WRF_surf_pressure, idx_WRF, weights)
         #pressure_levels = RE.create_ACOS_pressure_grid(psurf)
-        pressure_levels = copy(met_pressure_levels)
+        pressure_levels = copy(met_pressure)
 
         # Grab the specific humidity
-        specific_humidity_levels = grab_vector_from_3d(WRF_Q, idx_WRF, weights)
+        specific_humidity = grab_vector_from_3d(WRF_Q, idx_WRF, weights)
 
         # .. and Δθ
         pot_ΔT_levels = grab_vector_from_3d(WRF_pot_ΔT, idx_WRF, weights)
         # which we now turn into T
-        temperature_levels = T_from_Δθ.(pot_ΔT_levels, Ref(psurf), met_pressure_levels)
+        temperature = T_from_Δθ.(pot_ΔT_levels, Ref(psurf), met_pressure)
 
         # Create surface parameters
         # (just use same albedo for all bands for now..)
@@ -262,9 +262,9 @@ function generate_scenes_from_WRF(
             #####################
             vmr_levels=vmr_levels,
             #######################################
-            met_pressure_levels=met_pressure_levels,
-            specific_humidity_levels=specific_humidity_levels,
-            temperature_levels=temperature_levels
+            met_pressure=met_pressure,
+            specific_humidity=specific_humidity,
+            temperature=temperature
         )
 
         # .. and move it into the list
