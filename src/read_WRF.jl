@@ -135,7 +135,7 @@ function generate_scenes_from_WRF(
     coord_tree = build_tree(WRF_longitudes, WRF_latitudes)
 
     # x, y, time
-    WRF_surf_altitudes = nc["HGT"][:,:,1] * get_unit(nc["HGT"])
+    WRF_surf_elevation = nc["HGT"][:,:,1] * get_unit(nc["HGT"])
     # x, y, time
     WRF_surf_pressure = nc["PSFC"][:,:,1] * get_unit(nc["PSFC"])
 
@@ -206,7 +206,7 @@ function generate_scenes_from_WRF(
         idx_WRF = CartesianIndices(WRF_dims)[idx_flat]
 
         # Sample from array
-        scene_altitude = grab_scalar_from_2d(WRF_surf_altitudes, idx_WRF, weights)
+        scene_elevation = grab_scalar_from_2d(WRF_surf_elevation, idx_WRF, weights)
 
         # =======================
         # Generate for this scene
@@ -254,7 +254,7 @@ function generate_scenes_from_WRF(
             #######################
             loc_longitude=scene_lon,
             loc_latitude=scene_lat,
-            loc_altitude=scene_altitude,
+            loc_elevation=scene_elevation,
             #####################################
             surface_parameters=surface_parameters,
             ###############################
